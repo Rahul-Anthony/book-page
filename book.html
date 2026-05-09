@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Book</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Quicksand:wght@400;600&display=swap');
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #f9d5ec 0%, #f6cff5 60%, #e0c3fc 100%);
+      font-family: 'Quicksand', Arial, sans-serif;
+      color: #7a476f;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.93);
+      margin: 36px 0;
+      border-radius: 22px;
+      box-shadow: 0 4px 32px rgba(215, 147, 224, 0.25);
+      max-width: 830px;
+      width: 95%;
+      padding: 34px 30px 25px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 2px solid #efbee8;
+    }
+    .cover-img {
+      display: block;
+      width: 250px;
+      max-width: 60vw;
+      height: auto;
+      object-fit: cover;
+      border-radius: 17px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 16px #e3b1e7;
+      border: 2.5px solid #e6a8ea;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: #b667c2;
+      font-size: 2.7em;
+      margin-bottom: 8px;
+      letter-spacing: 0.7px;
+      text-shadow: 0px 3px 18px #eabff4;
+    }
+    h2 {
+      font-size: 1.25em;
+      color: #f187ba;
+      letter-spacing: 1.2px;
+      margin: 0 0 17px 0;
+      font-weight: 600;
+    }
+    .heart {
+      color: #f187ba;
+      font-size: 1.5em;
+      margin: 0 7px 4px 2px;
+      vertical-align: middle;
+      animation: heartbeat 1.4s infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1);}
+      40% {transform: scale(1.16);}
+      50% {transform: scale(1.13);}
+      60% {transform: scale(1.19);}
+    }
+    .pdf-viewer {
+      margin-top: 16px;
+      width: 100%;
+      min-height: 80vh;
+      height: 78vh;
+      border-radius: 14px;
+      box-shadow: 0 3px 26px #efd5f0;
+      border: 2.5px solid #e6a8ea;
+      background: #f9f8ff;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 22px;
+      color: #c096c9;
+      font-size: 1.05em;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 13px 2vw 7vw 2vw;
+        margin: 10px 0;
+      }
+      .cover-img {
+        width: 150px;
+        max-width: 90vw;
+      }
+      .pdf-viewer {
+        min-height: 60vh;
+        height: 52vh;
+      }
+      h1 { font-size: 1.4em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Cover image -->
+    
+    <h1>
+      <span class="heart">♡</span>
+      Welcome to world of words!
+      <span class="heart">♡</span>
+    </h1>
+    <h2>By : Ihshana</h2>
+    <img src="C:\Users\rahul\Desktop\intern\a_professional_kindle_book_cover_titled_silent_strength_with_the_subtitle_poems.png" alt="Book Cover" class="cover-img">
+    <embed src="C:\Users\rahul\Desktop\intern\SilentStrength_Designed.pdf" type="application/pdf" class="pdf-viewer">
+      <p>
+        <br>
+        <a href="C:\Users\rahul\Desktop\intern\SilentStrength_Designed.pdf" type="application/pdf" class="pdf-viewer" style="color:#0bc1e5; font-weight:bold; text-decoration: none; background-color: #f803af; padding: 2px;">Download</a>
+      </p>
+    </embed>
+    <div class="footer">
+      Made with <span style="color:#f187ba;">♥</span> especially for readers who dream big!
+    </div>
+  </div>
+</body>
+</html>
