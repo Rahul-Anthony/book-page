@@ -39,9 +39,54 @@
       z-index: 0;
     }
 
+    /* Animated moving lines background */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(90deg, transparent 0%, rgba(138, 43, 226, 0.15) 50%, transparent 100%),
+        linear-gradient(90deg, transparent 0%, rgba(75, 0, 130, 0.1) 50%, transparent 100%),
+        linear-gradient(90deg, transparent 0%, rgba(138, 43, 226, 0.12) 50%, transparent 100%),
+        linear-gradient(90deg, transparent 0%, rgba(75, 0, 130, 0.08) 50%, transparent 100%);
+      background-size: 200% 25%, 200% 25%, 200% 25%, 200% 25%;
+      background-position: 
+        0% 0%, 0% 25%, 0% 50%, 0% 75%;
+      animation: 
+        moveLines1 15s linear infinite,
+        moveLines2 20s linear infinite reverse,
+        moveLines3 18s linear infinite,
+        moveLines4 22s linear infinite reverse;
+      pointer-events: none;
+      z-index: 0;
+    }
+
     @keyframes twinkle {
       0%, 100% { opacity: 0.3; }
       50% { opacity: 0.8; }
+    }
+
+    @keyframes moveLines1 {
+      0% { background-position: 0% 0%, 0% 25%, 0% 50%, 0% 75%; }
+      100% { background-position: 200% 0%, 0% 25%, 0% 50%, 0% 75%; }
+    }
+
+    @keyframes moveLines2 {
+      0% { background-position: 0% 0%, 200% 25%, 0% 50%, 0% 75%; }
+      100% { background-position: 0% 0%, -200% 25%, 0% 50%, 0% 75%; }
+    }
+
+    @keyframes moveLines3 {
+      0% { background-position: 0% 0%, 0% 25%, 0% 50%, 0% 75%; }
+      100% { background-position: 0% 0%, 0% 25%, 200% 50%, 0% 75%; }
+    }
+
+    @keyframes moveLines4 {
+      0% { background-position: 0% 0%, 0% 25%, 0% 50%, 200% 75%; }
+      100% { background-position: 0% 0%, 0% 25%, 0% 50%, -200% 75%; }
     }
 
     .container {
@@ -61,33 +106,44 @@
       z-index: 1;
     }
 
-    .cover-section {
+    /* 3D flip container */
+    .flip-container {
+      perspective: 1000px;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      opacity: 1;
-      transition: opacity 0.8s ease-in-out;
-      pointer-events: auto;
     }
 
-    .cover-section.hidden {
-      opacity: 0;
-      pointer-events: none;
+    .flipper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .flipper.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .cover-section, .pdf-section {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cover-section {
+      transform: rotateY(0deg);
     }
 
     .pdf-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-      pointer-events: none;
-    }
-
-    .pdf-section.visible {
-      opacity: 1;
-      pointer-events: auto;
+      transform: rotateY(180deg);
     }
 
     .cover-img {
@@ -198,8 +254,8 @@
     .pdf-viewer {
       margin-top: 16px;
       width: 100%;
-      min-height: 80vh;
-      height: 78vh;
+      min-height: 70vh;
+      height: 70vh;
       border-radius: 14px;
       box-shadow: 0 0 30px rgba(138, 43, 226, 0.5),
                   0 0 60px rgba(75, 0, 130, 0.3);
@@ -226,7 +282,7 @@
       }
       .pdf-viewer {
         min-height: 60vh;
-        height: 52vh;
+        height: 60vh;
       }
       h1 { font-size: 1.4em; }
       .read-btn {
@@ -238,22 +294,29 @@
 </head>
 <body>
   <div class="container">
-    <!-- Cover Section -->
-    <div class="cover-section" id="coverSection">
-      <h1>
-        <span class="heart">♡</span>
-        Welcome to world of words!
-        <span class="heart">♡</span>
-      </h1>
-      <h2>By : Ihshana</h2>
-      <img src="a_professional_kindle_book_cover_titled_silent_strength_with_the_subtitle_poems.png" alt="Book Cover" class="cover-img">
-      <button class="read-btn" onclick="showBook()">Read</button>
-    </div>
+    <!-- Flip Container -->
+    <div class="flip-container">
+      <div class="flipper" id="flipper">
+        
+        <!-- Cover Section (Front) -->
+        <div class="cover-section">
+          <h1>
+            <span class="heart">♡</span>
+            Welcome to world of words!
+            <span class="heart">♡</span>
+          </h1>
+          <h2>By : Ihshana</h2>
+          <img src="a_professional_kindle_book_cover_titled_silent_strength_with_the_subtitle_poems.png" alt="Book Cover" class="cover-img">
+          <button class="read-btn" onclick="flipBook()">Read</button>
+        </div>
 
-    <!-- PDF Section -->
-    <div class="pdf-section" id="pdfSection">
-      <embed src="SilentStrength_Designed.pdf" type="application/pdf" class="pdf-viewer">
-      <button class="back-btn" onclick="showCover()">← Back to Cover</button>
+        <!-- PDF Section (Back) -->
+        <div class="pdf-section">
+          <embed src="SilentStrength_Designed.pdf" type="application/pdf" class="pdf-viewer">
+          <button class="back-btn" onclick="flipBook()">← Back to Cover</button>
+        </div>
+
+      </div>
     </div>
 
     <div class="footer">
@@ -262,14 +325,9 @@
   </div>
 
   <script>
-    function showBook() {
-      document.getElementById('coverSection').classList.add('hidden');
-      document.getElementById('pdfSection').classList.add('visible');
-    }
-
-    function showCover() {
-      document.getElementById('coverSection').classList.remove('hidden');
-      document.getElementById('pdfSection').classList.remove('visible');
+    function flipBook() {
+      const flipper = document.getElementById('flipper');
+      flipper.classList.toggle('flipped');
     }
   </script>
 </body>
