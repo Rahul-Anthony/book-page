@@ -272,7 +272,7 @@
     }
 
     /* PDF Viewer Container */
-    .pdf-viewer-container {
+    /* .pdf-viewer-container {
       margin-top: clamp(12px, 3vw, 16px);
       width: 100%;
       height: auto;
@@ -282,13 +282,21 @@
       border: 2.5px solid rgba(138, 43, 226, 0.8);
       background: #0d1225;
       overflow: hidden;
+    } */
+    .pdf-viewer-container{
+      background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+      url('a_professional_kindle_book_cover_titled_silent_strength_with_the_subtitle_poems.png');
+      background-size: cover;
+      background-position: center;
+      min-height: 400px;
+      
     }
-
     .pdf-viewer {
       width: 100%;
-      height: clamp(400px, 80vh, 70vh);
+      height: clamp(400px, 70vh, 80vh);
       border: none;
       border-radius: 12px;
+      background: transparent;
     }
 
     .pdf-fallback {
@@ -359,7 +367,7 @@
       .read-btn:hover,
       .back-btn:hover {
         box-shadow: 0 0 40px rgba(138, 43, 226, 0.8),
-                    0 8px 16px rgba(249, 1, 1, 0.4);
+                    0 8px 16px rgba(82, 69, 69, 0.4);
       }
     }
   </style>
@@ -376,7 +384,7 @@
             World of words!
             <span class="heart">♡</span>
           </h1>
-          <h2>By . Ihshana</h2>
+          <h2>By : Ihshana</h2>
           <img src="a_professional_kindle_book_cover_titled_silent_strength_with_the_subtitle_poems.png" alt="Book Cover" class="cover-img">
           <button class="read-btn" onclick="flipBook()" aria-label="Read the book">Read</button>
         </div>
