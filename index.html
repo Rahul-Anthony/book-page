@@ -19,7 +19,6 @@
       overflow-x: hidden;
     }
 
-    /* Animated stars background */
     body::before {
       content: '';
       position: fixed;
@@ -40,7 +39,6 @@
       z-index: 0;
     }
 
-    /* Animated moving lines background */
     body::after {
       content: '';
       position: fixed;
@@ -54,8 +52,7 @@
         linear-gradient(90deg, transparent 0%, rgba(138, 43, 226, 0.12) 50%, transparent 100%),
         linear-gradient(90deg, transparent 0%, rgba(75, 0, 130, 0.08) 50%, transparent 100%);
       background-size: 200% 25%, 200% 25%, 200% 25%, 200% 25%;
-      background-position: 
-        0% 0%, 0% 25%, 0% 50%, 0% 75%;
+      background-position: 0% 0%, 0% 25%, 0% 50%, 0% 75%;
       animation: 
         moveLines1 15s linear infinite,
         moveLines2 20s linear infinite reverse,
@@ -90,11 +87,15 @@
       100% { background-position: 0% 0%, 0% 25%, 0% 50%, -200% 75%; }
     }
 
+    /* ── CONTAINER with book-cover background ── */
     .container {
-      background: rgba(20, 25, 50, 0.85);
+      background-image: url('a_professional_kindle_book_cover_titled_silent_strength_with_the_subtitle_poems.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       margin: clamp(10px, 5vw, 36px) 0;
       border-radius: 22px;
-      box-shadow: 0 0 40px rgba(138, 43, 226, 0.4), 
+      box-shadow: 0 0 40px rgba(138, 43, 226, 0.4),
                   0 0 80px rgba(75, 0, 130, 0.2);
       max-width: 830px;
       width: clamp(300px, 95vw, 830px);
@@ -105,6 +106,18 @@
       border: 2px solid rgba(138, 43, 226, 0.6);
       position: relative;
       z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Dark semi-transparent overlay so text stays readable */
+    .container::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 14, 39, 0.78);
+      border-radius: 22px;
+      z-index: 0;
+      pointer-events: none;
     }
 
     /* 3D flip container */
@@ -114,6 +127,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
     .flipper {
@@ -276,7 +291,6 @@
       border-radius: 12px;
     }
 
-    /* Fallback message for unsupported browsers */
     .pdf-fallback {
       padding: clamp(20px, 5vw, 30px);
       text-align: center;
@@ -300,9 +314,10 @@
       color: #b19cd9;
       font-size: clamp(0.95em, 2.5vw, 1.05em);
       text-shadow: 0px 0px 10px rgba(177, 156, 217, 0.4);
+      position: relative;
+      z-index: 1;
     }
 
-    /* Mobile-specific optimizations */
     @media (max-width: 600px) {
       body {
         align-items: center;
@@ -321,7 +336,6 @@
         height: 60vh;
       }
 
-      /* Disable hover effects on touch devices */
       @media (hover: none) {
         .read-btn:hover,
         .back-btn:hover,
@@ -331,7 +345,6 @@
       }
     }
 
-    /* Landscape mode adjustments */
     @media (max-height: 600px) and (orientation: landscape) {
       .pdf-viewer {
         height: 75vh;
@@ -342,7 +355,6 @@
       }
     }
 
-    /* Large desktop */
     @media (min-width: 1024px) {
       .read-btn:hover,
       .back-btn:hover {
@@ -354,10 +366,9 @@
 </head>
 <body>
   <div class="container">
-    <!-- Flip Container -->
     <div class="flip-container">
       <div class="flipper" id="flipper">
-        
+
         <!-- Cover Section (Front) -->
         <div class="cover-section">
           <h1>
@@ -404,7 +415,6 @@
       flipper.classList.toggle('flipped');
     }
 
-    // Prevent accidental double-tap zoom on buttons
     document.addEventListener('touchend', function(event) {
       if (event.target.classList.contains('read-btn') || event.target.classList.contains('back-btn')) {
         event.preventDefault();
